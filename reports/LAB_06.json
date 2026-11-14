@@ -1,24 +1,34 @@
 {
   "gates": {"daily": ["fail", "not_reached", "not_reached", "not_reached"],
             "batch": ["pass", "pass", "pass", "pass"]},
-  "constants": {"model": null, "schemas_sha": null, "checks_sha": null, "reviewer": null, "task_ids": []},
+  "constants": {"model": "gemini-3.5-flash-lite", "schemas_sha": "703c0002892f27ec",
+                "checks_sha": "55abcd67e6a3b208", "reviewer": "scripted:approve-all",
+                "task_ids": ["batch-a", "batch-b", "one-4402", "one-4403", "one-4405", "one-4406", "one-4409", "one-4413"]},
   "arms": {
-    "S": {"single": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                     "mean_tokens": null, "mean_wall_s": null},
-          "batch": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                    "mean_tokens": null, "mean_wall_s": null}},
-    "M": {"single": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                     "mean_tokens": null, "mean_wall_s": null},
-          "batch": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                    "mean_tokens": null, "mean_wall_s": null}},
-    "S_plus": {"single": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                          "mean_tokens": null, "mean_wall_s": null},
-               "batch": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                         "mean_tokens": null, "mean_wall_s": null}}
+    "S": {"single": {"runs": 18, "passes": 11, "per_task": {"one-4402": 0, "one-4403": 3, "one-4405": 3, "one-4406": 0, "one-4409": 2, "one-4413": 3}, "sweep_min": 3, "sweep_max": 4, "all_three": 3, "mean_tokens": 54132, "mean_wall_s": 8.0},
+          "batch": {"runs": 6, "passes": 3, "per_task": {"batch-a": 0, "batch-b": 3}, "sweep_min": 1, "sweep_max": 1, "all_three": 1, "mean_tokens": 336670, "mean_wall_s": 30.9}},
+    "M": {"single": {"runs": 18, "passes": 12, "per_task": {"one-4402": 0, "one-4403": 1, "one-4405": 2, "one-4406": 3, "one-4409": 3, "one-4413": 3}, "sweep_min": 3, "sweep_max": 5, "all_three": 3, "mean_tokens": 26571, "mean_wall_s": 8.1},
+          "batch": {"runs": 6, "passes": 0, "per_task": {"batch-a": 0, "batch-b": 0}, "sweep_min": 0, "sweep_max": 0, "all_three": 0, "mean_tokens": 135012, "mean_wall_s": 22.6}},
+    "S_plus": {"single": {"runs": 18, "passes": 12, "per_task": {"one-4402": 0, "one-4403": 0, "one-4405": 3, "one-4406": 3, "one-4409": 3, "one-4413": 3}, "sweep_min": 4, "sweep_max": 4, "all_three": 4, "mean_tokens": 24851, "mean_wall_s": 8.1},
+               "batch": {"runs": 6, "passes": 0, "per_task": {"batch-a": 0, "batch-b": 0}, "sweep_min": 0, "sweep_max": 0, "all_three": 0, "mean_tokens": 127057, "mean_wall_s": 37.4}}
   },
-  "multiplier": {"single": null, "batch": null},
-  "spend_check": {"single": {"spent_more": null, "spend_raises_score": null, "one_agent_as_well": null},
-                  "batch": {"spent_more": null, "spend_raises_score": null, "one_agent_as_well": null}},
-  "failures": [],
-  "decision": {"single": null, "batch": null, "revisit_condition": null}
+  "multiplier": {"single": 0.49, "batch": 0.40},
+  "spend_check": {"single": {"spent_more": "no", "spend_raises_score": "no", "one_agent_as_well": "yes"},
+                  "batch": {"spent_more": "no", "spend_raises_score": "yes", "one_agent_as_well": "yes"}},
+  "failures": [
+    {"run_id": "split-batch-a-s01-494401", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-batch-a-s02-bc233b", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-batch-a-s03-f136ab", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-batch-b-s01-440c20", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-batch-b-s02-128b6a", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-batch-b-s03-426cb0", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-one-4402-s01-438112", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-one-4402-s02-4f8f8f", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-one-4402-s03-6de144", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-one-4403-s01-beaa2e", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-one-4403-s03-afa125", "anomaly": "none", "mast": "task_verification"},
+    {"run_id": "split-one-4405-s01-91b6a9", "anomaly": "none", "mast": "task_verification"}
+  ],
+  "decision": {"single": "single", "batch": "single",
+               "revisit_condition": "A preregistered larger set of batches of at least five independent issues where a split beats sequential S-plus in grounded whole-batch pass rate at matched actual spend across repeated runs, while retaining a material wall-clock improvement and returning every required contract before its limit."}
 }

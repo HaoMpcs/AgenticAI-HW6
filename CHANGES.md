@@ -28,3 +28,8 @@ Removals are logged like additions.
 - **Removed:** autonomous merge; pushes to a protected branch
 - **Constrained:** push_commit and post_comment by circumstance; every gated call to a person's answer, and no answer to a hold
 
+## Assignment 6
+- **Added:** nothing to RepoMind; the measured split remains only on the unmerged `lab-06-split` branch
+- **Removed:** nothing
+- **Constrained:** multi-agent decomposition to a measured experiment against one agent and an equal-spend one-agent rival, with the decision recorded in `decisions/0006-topology.md`
+
