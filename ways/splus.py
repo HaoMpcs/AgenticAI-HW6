@@ -65,7 +65,7 @@ def run(ctx) -> None:
         while ctx.client.total_tokens - start < int(slice_budget * 0.65) and attempt < 4:
             attempt += 1
             remaining_read = max(1, int(slice_budget * 0.70) - (ctx.client.total_tokens - start))
-            contract = _attempt(ctx, issue, attempt, min(max(1, slice_budget // 3), remaining_read), schema)
+            contract = _attempt(ctx, issue, attempt, remaining_read, schema)
             if contract is not None:
                 contracts.append(contract)
         chosen = _choose(contracts)
